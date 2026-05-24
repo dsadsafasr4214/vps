@@ -4,7 +4,9 @@ RUN apt update && apt install -y openssh-server sudo
 
 RUN mkdir /var/run/sshd
 
-RUN useradd -m user && echo "user:password123" | chpasswd
+RUN useradd -m -s /bin/bash user \
+    && echo "root:root123" | chpasswd \
+    && usermod -aG sudo user
 
 EXPOSE 22
 
